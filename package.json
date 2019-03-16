@@ -2,7 +2,9 @@
   "name": "bladderbok",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://www.localminimum.se/bladderbok-demo",
   "dependencies": {
+    "jquery": "^3.3.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-scripts": "2.1.8"
