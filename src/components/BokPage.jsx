@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 
+import arrow from './png/pilknapp2.png';
+
 const baseStyle = {
   background: '#991',
   position: 'relative',
@@ -20,7 +22,7 @@ const imgStyle = {
 
 const hintStyle = {
   position: 'absolute',
-  right: '0.5em',
+  right: 0,
   bottom: 0,
   fontSize: '175%',
   color: '#0007',
@@ -70,7 +72,13 @@ export default class BookPage extends Component {
       if (page == null) return <div style={style} />;
       let RenderHint;
       if (showHint) {
-        RenderHint = <div title={hintTitle[language]} style={hintStyle} onClick={this.onClick.bind(this)} >➥</div>
+        RenderHint = <img
+          title={hintTitle[language]}
+          alt={hintTitle[language]}
+          style={Object.assign({}, hintStyle, { width: 0.1 * width })}
+          onClick={this.onClick.bind(this)}
+          src={arrow}
+        />
       }
       return (
         <div style={style}>
