@@ -6,7 +6,9 @@ export default class BokPageContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pages: [], currentPage: 0, claimHeight: 0.2,
+      pages: [],
+      currentPage: 0,
+      claimHeight: 0.2,
       lastFlip: new Date()
     };
   }
@@ -29,11 +31,11 @@ export default class BokPageContainer extends Component {
   noFlip() {}
 
   render() {
-    const { width, height, onFlipAll, isOpen, showHint } = this.props;
+    const { width, height, onFlipAll, isOpen, showHint, language } = this.props;
     const { claimHeight, pages } = this.state;
     let { currentPage } = this.state;
     if (isOpen && currentPage === 0) currentPage = 1;
-    const page = pages[currentPage];
+    const page = pages[language][currentPage];
     const onNext = currentPage === 0 ? onFlipAll: this.onFlipPage.bind(this, 1);
     const onPrev = currentPage === 0 ? this.noFlip.bind(this) : this.onFlipPage.bind(this, -1);
     return <BokPage

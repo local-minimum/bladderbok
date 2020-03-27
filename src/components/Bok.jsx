@@ -43,7 +43,7 @@ export default class Bok extends Component {
 
 
   render() {
-    const { width, height, offsetY } = this.props;
+    const { width, height, offsetY, language } = this.props;
     const { showHint, isOpen } = this.state;
     const  style = Object.assign({}, baseStyle, {
       width, height,
@@ -52,10 +52,10 @@ export default class Bok extends Component {
     if (width == null || isNaN(width)) return <div />;
     return (
       <div style={style}>
-        <BokPageAnna1 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} showHint={isOpen && showHint} onInteraction={this.recievedClick} />
-        <BokPageAnna2 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} showHint={isOpen && showHint} onInteraction={this.recievedClick} />
-        <BokPageAnna3 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} showHint={isOpen && showHint} onInteraction={this.recievedClick} />
-        <BokPageAnna4 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} showHint={showHint} onInteraction={this.recievedClick} />
+        <BokPageAnna1 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} showHint={isOpen && showHint} onInteraction={this.recievedClick} language={language}/>
+        <BokPageAnna2 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} showHint={isOpen && showHint} onInteraction={this.recievedClick} language={language}/>
+        <BokPageAnna3 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} showHint={isOpen && showHint} onInteraction={this.recievedClick} language={language}/>
+        <BokPageAnna4 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} showHint={showHint} onInteraction={this.recievedClick} language={language} />
       </div>
     )
   }

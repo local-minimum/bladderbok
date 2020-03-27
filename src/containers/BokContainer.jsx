@@ -47,6 +47,8 @@ export default class BokContainer extends Component {
   }
 
   render() {
-    return <Bok {...this.widthHeight} offsetY={this.offsetY} isOpen={this.state.isOpen} />;
+    const { isOpen } = this.state;
+    const { language } = this.props;
+    return <Bok {...this.widthHeight} offsetY={this.offsetY} isOpen={isOpen} language={language} />;
   }
 }

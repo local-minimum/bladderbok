@@ -1,20 +1,34 @@
 import BokPageContainer from './BokPageContainer';
+import { IMAGE_HEIGHTS, IMAGE_HEIGHTS_TOTAL } from './util';
 
-import img0 from './png/0_4.png';
-import img1 from './png/1_4.png';
-import img2 from './png/2_4.png';
-import img3 from './png/3_4.png';
-import img4 from './png/4_4.png';
-import img5 from './png/5_4.png';
-import img6 from './png/6_4.png';
+import svImg0 from './png/sv/5_4_kant.png';
+import svImg1 from './png/sv/1_4_kant.png';
+import svImg2 from './png/sv/2_4_kant.png';
+import svImg3 from './png/sv/3_4_kant.png';
+import svImg4 from './png/sv/4_4_kant.png';
+import svImg5 from './png/sv/5_4_kant.png';
+import svImg6 from './png/sv/6_4_kant.png';
+
+import enImg0 from './png/en/5_4_eng.png';
+import enImg1 from './png/en/1_4_eng.png';
+import enImg2 from './png/en/2_4_eng.png';
+import enImg3 from './png/en/3_4_eng.png';
+import enImg4 from './png/en/4_4_eng.png';
+import enImg5 from './png/en/5_4_eng.png';
+import enImg6 from './png/en/6_4_eng.png';
+
+const pages = {
+  sv: [svImg0, svImg1, svImg2, svImg3, svImg4, svImg5, svImg6],
+  en: [enImg0, enImg1, enImg2, enImg3, enImg4, enImg5, enImg6],
+};
 
 export default class BokPageAnna4 extends BokPageContainer {
   constructor(props) {
       super(props);
       this.state = {
         currentPage: 0,
-        pages: [img0, img1, img2, img3, img4, img5, img6],
-        claimHeight: 190 / (109 + 109 + 190 + 190),
+        pages,
+        claimHeight: IMAGE_HEIGHTS[3] / IMAGE_HEIGHTS_TOTAL,
       }
   }
 }
