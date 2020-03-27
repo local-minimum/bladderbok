@@ -43,6 +43,7 @@ export default class BokPageContainer extends Component {
       onNextPage={onNext}
       onPrevPage={onPrev}
       showHint={showHint}
+      language={language}
     />;
   }
 

@@ -36,6 +36,11 @@ const hintStyle = {
 
 const pageFlipThreshold = 0.4;
 
+const hintTitle = {
+  sv: 'Bläddra till nästa sida',
+  en: 'Flip to the next page',
+}
+
 export default class BookPage extends Component {
   constructor(props) {
       super(props);
@@ -57,7 +62,7 @@ export default class BookPage extends Component {
   }
 
   render() {
-      const { width, height, page, showHint } = this.props;
+      const { width, height, page, showHint, language } = this.props;
       if (width == null || isNaN(width)) return <div />;
       let { altText } = this.props;
       if (!altText) altText = 'No alt text set';
@@ -65,7 +70,7 @@ export default class BookPage extends Component {
       if (page == null) return <div style={style} />;
       let RenderHint;
       if (showHint) {
-        RenderHint = <div title="Bläddra till nästa sida" style={hintStyle} onClick={this.onClick.bind(this)} >➥</div>
+        RenderHint = <div title={hintTitle[language]} style={hintStyle} onClick={this.onClick.bind(this)} >➥</div>
       }
       return (
         <div style={style}>
