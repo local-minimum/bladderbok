@@ -17,7 +17,7 @@ const pageStyle = {
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { language: 'en' };
+    this.state = { language: 'sv' };
     this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
   }
 
@@ -36,7 +36,7 @@ export default class App extends Component {
           marginSides={5}
           language={language}
         />
-        <BokAbout />
+        <BokAbout language={language} />
         <SelectLanguage onSelectLanguage={this.handleChangeLanguage} language={language} />
       </div>
     );

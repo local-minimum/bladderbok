@@ -36,6 +36,32 @@ const styleClicker = {
   cursor: 'pointer',
 }
 
+const about = {
+  sv: {
+    title: 'Denna bok ger dig svar på viktiga frågor som',
+    questions: [
+      'Var har du glömt stövlarna?',
+      'Var är tårtan?',
+      'Vad har du sparat bakom kiosken?',
+    ],
+    fun: 'Mycket nöje!',
+    credits: 'Anna Hedenrud, författare och illustratör',
+    minimize: 'Minimera',
+    expand: 'Expandera',
+  },
+  en: {
+    title: 'This book answers crucial questions like',
+    questions: [
+      'Where did you hide the rubber boots?',
+      'Where is the cake?',
+      'What have you saved behind the shop?',
+    ],
+    fun: 'Have fun!',
+    credits: 'Anna Hedenrud, author and illustrator',
+    minimize: 'Minimize',
+    expand: 'Expand',
+  }
+};
 
 export default class BokAbout extends Component {
   constructor(props) {
@@ -44,24 +70,28 @@ export default class BokAbout extends Component {
   }
 
   render() {
+    const { language } = this.props;
     const { expanded } = this.state;
+    const texts = about[language];
     if (expanded) {
       return (
         <div style={aboutStyle}>
-          <h1 style={styleH1}>Denna bok ger dig svar på viktiga frågor som</h1>
-          <p><em>Var har du glömt stövlarna?</em></p>
-          <p><em>Var är tårtan?</em></p>
-          <p><em>Vad har du sparat bakom kiosken?</em></p>
+          <h1 style={styleH1}>{texts.title}</h1>
+          {
+            texts.questions.map((q, i) => (
+              <p key={`q-${i}`}><em>{q}</em></p>
+            ))
+          }
           <div style={styleSpacer}/>
-          <p>Mycket nöje!</p>
+        <p>{texts.fun}</p>
           <div style={styleSpacer}/>
-          <p>Anna Hedenrud, författare och illustratör<span title="Minimera" style={styleClicker} onClick={() => {this.setState({expanded: false})}}>▼</span></p>
+          <p>{texts.credits}<span title={texts.minimize} style={styleClicker} onClick={() => {this.setState({expanded: false})}}>▼</span></p>
         </div>
       );
     }
     return (
       <div style={aboutStyle}>
-          <p>Av: Anna Hedenrud<span title="Expandera" style={styleClicker} onClick={() => {this.setState({expanded: true})}}>▲</span></p>
+          <p>Av: Anna Hedenrud<span title={texts.expanded} style={styleClicker} onClick={() => {this.setState({expanded: true})}}>▲</span></p>
       </div>
     );
   }
