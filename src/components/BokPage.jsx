@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 
-import arrow from './png/pilknapp2.png';
+import flipTo1 from './png/flip_to_1.png';
+import flipTo2 from './png/flip_to_2.png';
+import flipTo3 from './png/flip_to_3.png';
+import flipTo4 from './png/flip_to_4.png';
+import flipTo5 from './png/flip_to_5.png';
+import flipTo6 from './png/flip_to_6.png';
+
+const Arrows = [null, flipTo1, flipTo2, flipTo3, flipTo4, flipTo5, flipTo6];
 
 const baseStyle = {
   background: '#991',
@@ -48,12 +55,24 @@ export default class BookPage extends Component {
       super(props);
       this.imgRef = React.createRef();
       this.state = { lastClick: new Date(), showHint: false };
+      this.onMouseMove = this.onMouseMove.bind(this);
+      this.onMouseExit = this.onMouseExit.bind(this);
+      this.onClick = this.onClick.bind(this);
   }
 
   getRelX(inputX) {
     const { left } = $(this.imgRef.current).offset();
     const { width } = this.props;
     return (inputX - left) / width;
+  }
+
+  onMouseMove(evt) {
+    const relImgX = this.getRelX(evt.pageX);
+    this.setState({ showHint: (relImgX > 1 - pageFlipThreshold) });
+  }
+
+  onMouseExit() {
+    this.setState({ showHint: false });
   }
 
   onClick(evt) {
@@ -64,25 +83,35 @@ export default class BookPage extends Component {
   }
 
   render() {
-      const { width, height, page, showHint, language } = this.props;
+      const {
+        width, height, page, showHint: forceHint, language,
+        nextPageIdx, altText
+      } = this.props;
+      const { showHint } = this.state;
       if (width == null || isNaN(width)) return <div />;
-      let { altText } = this.props;
-      if (!altText) altText = 'No alt text set';
       const style = Object.assign({}, baseStyle, { width, height });
       if (page == null) return <div style={style} />;
       let RenderHint;
-      if (showHint) {
+      if (showHint || forceHint) {
         RenderHint = <img
           title={hintTitle[language]}
           alt={hintTitle[language]}
           style={Object.assign({}, hintStyle, { width: 0.1 * width })}
-          onClick={this.onClick.bind(this)}
-          src={arrow}
+          src={Arrows[nextPageIdx]}
         />
       }
       return (
-        <div style={style}>
-          <img src={page} alt={altText} onClick={this.onClick.bind(this)} style={imgStyle} ref={this.imgRef}/>
+        <div style={style}
+          onClick={this.onClick}
+          onMouseMove={this.onMouseMove}
+          onMouseLeave={this.onMouseExit}
+        >
+          <img
+            src={page}
+            alt={altText == null ? 'No alt text set' : altText}
+            style={imgStyle}
+            ref={this.imgRef}
+          />
           {RenderHint}
         </div>
       );

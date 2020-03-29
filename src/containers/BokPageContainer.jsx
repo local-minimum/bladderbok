@@ -41,8 +41,12 @@ export default class BokPageContainer extends Component {
     const page = pages[language][currentPage];
     const onNext = currentPage === 0 ? onFlipAll: () => this.onFlipPage(1)
     const onPrev = currentPage === 0 ? this.noFlip : () => this.onFlipPage(-1);
+    const nextPageIdx = currentPage + 1 === pages[language].length ? 1 : currentPage + 1;
     return <BokPage
-      width={width} height={height * claimHeight} page={page}
+      width={width}
+      height={height * claimHeight}
+      page={page}
+      nextPageIdx={nextPageIdx}
       onNextPage={onNext}
       onPrevPage={onPrev}
       showHint={showHint}

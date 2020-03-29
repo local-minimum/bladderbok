@@ -66,7 +66,7 @@ const about = {
 export default class BokAbout extends Component {
   constructor(props) {
       super(props);
-      this.state = { expanded: true };
+      this.state = { expanded: false };
   }
 
   render() {

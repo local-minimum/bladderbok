@@ -4,7 +4,7 @@ import BokPageAnna2 from '../containers/BokPageAnna2';
 import BokPageAnna3 from '../containers/BokPageAnna3';
 import BokPageAnna4 from '../containers/BokPageAnna4';
 
-const WAIT_UNTIL_ASSIST = 1000 * 10;
+const WAIT_UNTIL_ASSIST = 1000 * 2;
 
 const baseStyle = {
   position: 'absolute', top: '50%', left: '50%',
@@ -33,12 +33,12 @@ export default class Bok extends Component {
 
   recievedClick() {
     this.setState({ showHint: false, lastClick: new Date() });
-    window.setTimeout(this.showHint, WAIT_UNTIL_ASSIST + 1);
+    // window.setTimeout(this.showHint, WAIT_UNTIL_ASSIST + 1);
   }
 
   onFlipAll() {
     this.setState({ isOpen: true, lastClick: new Date(), showHint: false });
-    window.setTimeout(this.showHint, WAIT_UNTIL_ASSIST + 1);
+    // window.setTimeout(this.showHint, WAIT_UNTIL_ASSIST + 1);
   }
 
 
@@ -52,9 +52,9 @@ export default class Bok extends Component {
     if (width == null || isNaN(width)) return <div />;
     return (
       <div style={style}>
-        <BokPageAnna1 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} showHint={isOpen && showHint} onInteraction={this.recievedClick} language={language}/>
-        <BokPageAnna2 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} showHint={isOpen && showHint} onInteraction={this.recievedClick} language={language}/>
-        <BokPageAnna3 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} showHint={isOpen && showHint} onInteraction={this.recievedClick} language={language}/>
+        <BokPageAnna1 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} onInteraction={this.recievedClick} language={language}/>
+        <BokPageAnna2 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} onInteraction={this.recievedClick} language={language}/>
+        <BokPageAnna3 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} onInteraction={this.recievedClick} language={language}/>
         <BokPageAnna4 height={height} width={width} isOpen={isOpen} onFlipAll={this.onFlipAll} showHint={showHint} onInteraction={this.recievedClick} language={language} />
       </div>
     )
