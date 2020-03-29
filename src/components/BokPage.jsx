@@ -8,6 +8,8 @@ import flipTo4 from './png/flip_to_4.png';
 import flipTo5 from './png/flip_to_5.png';
 import flipTo6 from './png/flip_to_6.png';
 
+import './BookPage.css';
+
 const Arrows = [null, flipTo1, flipTo2, flipTo3, flipTo4, flipTo5, flipTo6];
 
 const baseStyle = {
@@ -29,7 +31,6 @@ const imgStyle = {
 
 const hintStyle = {
   position: 'absolute',
-  right: 0,
   bottom: 0,
   fontSize: '175%',
   color: '#0007',
@@ -43,6 +44,14 @@ const hintStyle = {
   cursor: 'pointer',
 };
 
+const hintNextStyle = {
+  right: 0,
+}
+
+const hintPrevStyle = {
+  left: 0,
+}
+
 const pageFlipThreshold = 0.4;
 
 const hintTitle = {
@@ -54,7 +63,7 @@ export default class BookPage extends Component {
   constructor(props) {
       super(props);
       this.imgRef = React.createRef();
-      this.state = { lastClick: new Date(), showNextHint: false };
+      this.state = { lastClick: new Date(), showNextHint: false, showPrevHint: false };
       this.onMouseMove = this.onMouseMove.bind(this);
       this.onMouseExit = this.onMouseExit.bind(this);
       this.onClick = this.onClick.bind(this);
@@ -68,35 +77,55 @@ export default class BookPage extends Component {
 
   onMouseMove(evt) {
     const relImgX = this.getRelX(evt.pageX);
-    this.setState({ showNextHint: (relImgX > 1 - pageFlipThreshold) });
+    this.setState({
+      showNextHint: (relImgX > 1 - pageFlipThreshold),
+      showPrevHint: (relImgX < pageFlipThreshold),
+    });
   }
 
   onMouseExit() {
-    this.setState({ showNextHint: false });
+    this.setState({ showNextHint: false, showPrevHint: false });
   }
 
   onClick(evt) {
     const relImgX = this.getRelX(evt.pageX);
     if (relImgX > 1 - pageFlipThreshold) this.props.onNextPage();
     if (relImgX < pageFlipThreshold) this.props.onPrevPage();
-    this.setState({ lastClick: new Date(), showHint: false });
+    this.setState({ lastClick: new Date() });
   }
 
   render() {
       const {
-        width, height, page, forceNextHint, language,
-        nextPageIdx, altText
+        width,
+        height,
+        page,
+        forceNextHint,
+        forcePrevHint,
+        language,
+        nextPageIdx,
+        prevPageIdx,
+        altText
       } = this.props;
-      const { showNextHint} = this.state;
+      const { showNextHint, showPrevHint} = this.state;
       if (width == null || isNaN(width)) return <div />;
       const style = Object.assign({}, baseStyle, { width, height });
       if (page == null) return <div style={style} />;
-      let RenderHint;
-      if ((showNextHint && forceNextHint !== false) || forceNextHint === true) {
-        RenderHint = <img
+      let RenderNextHint;
+      let RenderPrevHint;
+      if ((showPrevHint && forcePrevHint !== false) || forcePrevHint === true) {
+        RenderPrevHint = <img
+          className="previous-hint"
           title={hintTitle[language]}
           alt={hintTitle[language]}
-          style={Object.assign({}, hintStyle, { width: 0.1 * width })}
+          style={Object.assign({}, hintStyle, hintPrevStyle, { width: 0.1 * width })}
+          src={Arrows[prevPageIdx]}
+        />
+      }
+      if ((showNextHint && forceNextHint !== false) || forceNextHint === true) {
+        RenderNextHint = <img
+          title={hintTitle[language]}
+          alt={hintTitle[language]}
+          style={Object.assign({}, hintStyle, hintNextStyle, { width: 0.1 * width })}
           src={Arrows[nextPageIdx]}
         />
       }
@@ -112,7 +141,8 @@ export default class BookPage extends Component {
             style={imgStyle}
             ref={this.imgRef}
           />
-          {RenderHint}
+          {RenderPrevHint}
+          {RenderNextHint}
         </div>
       );
   }

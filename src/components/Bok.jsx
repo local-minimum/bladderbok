@@ -59,6 +59,7 @@ export default class Bok extends Component {
           onFlipAll={this.onFlipAll}
           onInteraction={this.recievedClick}
           forceNextHint={isOpen ? forceNextHint : false}
+          forcePrevHint={isOpen ? null : false}
           language={language}
         />
         <BokPageAnna2
@@ -68,6 +69,7 @@ export default class Bok extends Component {
           onFlipAll={this.onFlipAll}
           onInteraction={this.recievedClick}
           forceNextHint={isOpen ? forceNextHint : false}
+          forcePrevHint={isOpen ? null : false}
           language={language}
         />
         <BokPageAnna3
@@ -77,6 +79,7 @@ export default class Bok extends Component {
           onFlipAll={this.onFlipAll}
           onInteraction={this.recievedClick}
           forceNextHint={isOpen ? forceNextHint : false}
+          forcePrevHint={isOpen ? null : false}
           language={language}
         />
         <BokPageAnna4
@@ -85,6 +88,7 @@ export default class Bok extends Component {
           isOpen={isOpen}
           onFlipAll={this.onFlipAll}
           forceNextHint={forceNextHint}
+          forcePrevHint={isOpen ? null : false}
           onInteraction={this.recievedClick}
           language={language}
         />

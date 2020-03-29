@@ -48,6 +48,7 @@ const about = {
     credits: 'Anna Hedenrud, författare och illustratör',
     minimize: 'Minimera',
     expand: 'Expandera',
+    collapsed: 'Av: Anna Hedenrud',
   },
   en: {
     title: 'This book answers crucial questions like',
@@ -60,6 +61,7 @@ const about = {
     credits: 'Anna Hedenrud, author and illustrator',
     minimize: 'Minimize',
     expand: 'Expand',
+    collapsed: 'By: Anna Hedenrud',
   }
 };
 
@@ -91,7 +93,7 @@ export default class BokAbout extends Component {
     }
     return (
       <div style={aboutStyle}>
-          <p>Av: Anna Hedenrud<span title={texts.expanded} style={styleClicker} onClick={() => {this.setState({expanded: true})}}>▲</span></p>
+          <p>{texts.collapsed}<span title={texts.expanded} style={styleClicker} onClick={() => {this.setState({expanded: true})}}>▲</span></p>
       </div>
     );
   }
