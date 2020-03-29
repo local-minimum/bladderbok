@@ -34,7 +34,7 @@ export default class BokPageContainer extends Component {
   noFlip() {}
 
   render() {
-    const { width, height, onFlipAll, isOpen, showHint, language } = this.props;
+    const { width, height, onFlipAll, isOpen, forceNextHint, language } = this.props;
     const { claimHeight, pages } = this.state;
     let { currentPage } = this.state;
     if (isOpen && currentPage === 0) currentPage = 1;
@@ -49,7 +49,7 @@ export default class BokPageContainer extends Component {
       nextPageIdx={nextPageIdx}
       onNextPage={onNext}
       onPrevPage={onPrev}
-      showHint={showHint}
+      forceNextHint={forceNextHint}
       language={language}
     />;
   }

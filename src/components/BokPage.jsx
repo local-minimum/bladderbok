@@ -54,7 +54,7 @@ export default class BookPage extends Component {
   constructor(props) {
       super(props);
       this.imgRef = React.createRef();
-      this.state = { lastClick: new Date(), showHint: false };
+      this.state = { lastClick: new Date(), showNextHint: false };
       this.onMouseMove = this.onMouseMove.bind(this);
       this.onMouseExit = this.onMouseExit.bind(this);
       this.onClick = this.onClick.bind(this);
@@ -68,11 +68,11 @@ export default class BookPage extends Component {
 
   onMouseMove(evt) {
     const relImgX = this.getRelX(evt.pageX);
-    this.setState({ showHint: (relImgX > 1 - pageFlipThreshold) });
+    this.setState({ showNextHint: (relImgX > 1 - pageFlipThreshold) });
   }
 
   onMouseExit() {
-    this.setState({ showHint: false });
+    this.setState({ showNextHint: false });
   }
 
   onClick(evt) {
@@ -84,15 +84,15 @@ export default class BookPage extends Component {
 
   render() {
       const {
-        width, height, page, showHint: forceHint, language,
+        width, height, page, forceNextHint, language,
         nextPageIdx, altText
       } = this.props;
-      const { showHint } = this.state;
+      const { showNextHint} = this.state;
       if (width == null || isNaN(width)) return <div />;
       const style = Object.assign({}, baseStyle, { width, height });
       if (page == null) return <div style={style} />;
       let RenderHint;
-      if (showHint || forceHint) {
+      if ((showNextHint && forceNextHint !== false) || forceNextHint === true) {
         RenderHint = <img
           title={hintTitle[language]}
           alt={hintTitle[language]}
