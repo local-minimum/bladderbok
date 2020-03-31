@@ -14,9 +14,12 @@ const baseStyle = {
 export default class Bok extends Component {
   constructor(props) {
     super(props);
-    this.state = { forceNextHint: null, lastClick: new Date(), isOpen: false };
+    this.state = {
+      forceNextHint: null,
+      lastClick: new Date(),
+    };
     this.showHint = this.showHint.bind(this);
-    this.recievedClick = this.recievedClick.bind(this);
+    this.filpOne = this.filpOne.bind(this);
     this.onFlipAll = this.onFlipAll.bind(this);
   }
 
@@ -31,20 +34,30 @@ export default class Bok extends Component {
     }
   }
 
-  recievedClick() {
-    this.setState({ forceNextHint: null, lastClick: new Date() });
-    // window.setTimeout(this.showHint, WAIT_UNTIL_ASSIST + 1);
+  filpOne(newPage, pageIdx) {
+    const { currentPages, onSetPages } = this.props;
+    this.setState({
+      forceNextHint: null,
+      lastClick: new Date(),
+    },
+      () => onSetPages(currentPages.map((page, idx) => idx === pageIdx ? newPage : page))
+    );
   }
 
-  onFlipAll() {
-    this.setState({ isOpen: true, lastClick: new Date(), forceNextHint: null});
-    // window.setTimeout(this.showHint, WAIT_UNTIL_ASSIST + 1);
+  onFlipAll(newPage) {
+    const { currentPages, onSetPages } = this.props;
+    this.setState({
+      lastClick: new Date(),
+      forceNextHint: null,
+    },
+      () => onSetPages(currentPages.map(_ => newPage))
+    );
   }
 
 
   render() {
-    const { width, height, offsetY, language } = this.props;
-    const { forceNextHint, isOpen } = this.state;
+    const { width, height, offsetY, language, currentPages } = this.props;
+    const { forceNextHint } = this.state;
     const  style = Object.assign({}, baseStyle, {
       width, height,
       marginTop: -height * 0.5 + offsetY, marginLeft: -width * 0.5,
@@ -55,42 +68,33 @@ export default class Bok extends Component {
         <BokPageAnna1
           height={height}
           width={width}
-          isOpen={isOpen}
-          onFlipAll={this.onFlipAll}
-          onInteraction={this.recievedClick}
-          forceNextHint={isOpen ? forceNextHint : false}
-          forcePrevHint={isOpen ? null : false}
+          onInteraction={this.filpOne}
           language={language}
+          currentPage={currentPages[0]}
         />
         <BokPageAnna2
           height={height}
           width={width}
-          isOpen={isOpen}
-          onFlipAll={this.onFlipAll}
-          onInteraction={this.recievedClick}
-          forceNextHint={isOpen ? forceNextHint : false}
-          forcePrevHint={isOpen ? null : false}
+          onInteraction={this.filpOne}
           language={language}
+          currentPage={currentPages[1]}
         />
         <BokPageAnna3
           height={height}
           width={width}
-          isOpen={isOpen}
-          onFlipAll={this.onFlipAll}
-          onInteraction={this.recievedClick}
-          forceNextHint={isOpen ? forceNextHint : false}
-          forcePrevHint={isOpen ? null : false}
+          onInteraction={this.filpOne}
           language={language}
+          currentPage={currentPages[2]}
         />
         <BokPageAnna4
           height={height}
           width={width}
-          isOpen={isOpen}
-          onFlipAll={this.onFlipAll}
+          claimAll={currentPages[3] < 1}
           forceNextHint={forceNextHint}
-          forcePrevHint={isOpen ? null : false}
-          onInteraction={this.recievedClick}
+          forcePrevHint={currentPages[3] === 0 ? false : null}
+          onInteraction={currentPages[3] === 0 ? this.onFlipAll : this.filpOne}
           language={language}
+          currentPage={currentPages[3]}
         />
       </div>
     )

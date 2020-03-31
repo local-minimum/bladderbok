@@ -48,12 +48,14 @@ export default class BokContainer extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { language } = this.props;
+    const { language, currentPages, onSetPages } = this.props;
     return <Bok
       {...this.widthHeight}
       offsetY={this.offsetY}
       isOpen={isOpen}
       language={language}
+      currentPages={currentPages}
+      onSetPages={onSetPages}
     />;
   }
 }

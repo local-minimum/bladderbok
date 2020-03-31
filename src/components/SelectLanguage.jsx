@@ -28,7 +28,12 @@ const otherLanguageStyle = {
     marginBottom: '0.2em',
 }
 
-export default function SelectLanguage({ onSelectLanguage, language }) {
+const closeBook = {
+    sv: 'Stäng boken',
+    en: 'Close the book',
+}
+
+export default function SelectLanguage({ onSelectLanguage, onCloseBook, language }) {
     return (
         <div style={languageStyle}>
             <div onClick={() => onSelectLanguage('sv')} style={language === 'sv' ? activeLanguageStyle : otherLanguageStyle}>
@@ -36,6 +41,9 @@ export default function SelectLanguage({ onSelectLanguage, language }) {
             </div>
             <div onClick={() => onSelectLanguage('en')} style={language === 'en' ? activeLanguageStyle : otherLanguageStyle}>
                 English 
+            </div>
+            <div onClick={onCloseBook} style={otherLanguageStyle}>
+                {closeBook[language]}
             </div>
         </div>
     );

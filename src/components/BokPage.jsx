@@ -105,9 +105,8 @@ export default class BookPage extends Component {
         altText
       } = this.props;
       const { showNextHint, showPrevHint} = this.state;
-      if (width == null || isNaN(width)) return <div />;
+      if (width == null || isNaN(width) || page == null) return <div />;
       const style = Object.assign({}, baseStyle, { width, height });
-      if (page == null) return <div style={style} />;
       let RenderNextHint;
       let RenderPrevHint;
       if ((showPrevHint && forcePrevHint !== false) || forcePrevHint === true) {

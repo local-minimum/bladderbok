@@ -17,16 +17,29 @@ const pageStyle = {
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { language: 'sv' };
+    this.state = {
+      language: 'sv',
+      currentPages: [0, 0, 0, 0],
+    };
     this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
+    this.handleCloseBook = this.handleCloseBook.bind(this);
+    this.handleSetPages = this.handleSetPages.bind(this);
   }
 
   handleChangeLanguage(language) {
     this.setState({ language });
   }
+
+  handleSetPages(pages) {
+    this.setState({ currentPages: pages });
+  }
+
+  handleCloseBook() {
+    this.setState({ currentPages: [0, 0, 0 , 0] });
+  }
   
   render() {
-    const { language } = this.state;
+    const { language, currentPages } = this.state;
     return (
       <div style={pageStyle} >
         <BokContainer
@@ -34,10 +47,16 @@ export default class App extends Component {
           marginTop={5}
           marginBottom={15}
           marginSides={5}
-          language={language}
+          language={language}          
+          onSetPages={this.handleSetPages}
+          currentPages={currentPages}
         />
-        <BokAbout language={language} />
-        <SelectLanguage onSelectLanguage={this.handleChangeLanguage} language={language} />
+        <BokAbout language={language} />        
+        <SelectLanguage
+          onSelectLanguage={this.handleChangeLanguage}
+          onCloseBook={this.handleCloseBook}
+          language={language}          
+        />
       </div>
     );
   }
