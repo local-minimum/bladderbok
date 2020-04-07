@@ -89,10 +89,10 @@ export default class Bok extends Component {
         <BokPageAnna4
           height={height}
           width={width}
-          claimAll={currentPages[3] < 1}
+          claimAll={currentPages[3] < 2}
           forceNextHint={forceNextHint}
           forcePrevHint={currentPages[3] === 0 ? false : null}
-          onInteraction={currentPages[3] === 0 ? this.onFlipAll : this.filpOne}
+          onInteraction={currentPages[3] < 2 ? this.onFlipAll : this.filpOne}
           language={language}
           currentPage={currentPages[3]}
         />

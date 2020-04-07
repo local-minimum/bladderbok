@@ -22,10 +22,10 @@ export default class BokPageContainer extends Component {
     if ((now - lastFlip) < NO_DOUBLEFLIP) return;
     const { onInteraction } = this.props;
     let nextPage = currentPage + direction;
-    if (nextPage < 1) {
+    if (nextPage === 1 && direction < 0) {
       nextPage = pages[language].length - 1;
     } else if (nextPage >= pages[language].length) {
-      nextPage = 1;
+      nextPage = 2;
     }
     this.setState({ lastFlip: now });
     onInteraction(nextPage, pagePart);
@@ -47,8 +47,8 @@ export default class BokPageContainer extends Component {
     const page = pages[language][currentPage];
     const onNext = () => this.onFlipPage(1)
     const onPrev = currentPage === 0 ? this.noFlip : () => this.onFlipPage(-1);
-    const nextPageIdx = currentPage + 1 === pages[language].length ? 1 : currentPage + 1;
-    const prevPageIdx = currentPage - 1 < 1 ? pages[language].length - 1 : currentPage - 1;
+    const nextPageIdx = currentPage + 1 === pages[language].length ? 2 : currentPage + 1;
+    const prevPageIdx = currentPage - 1 === 1 ? pages[language].length - 1 : currentPage - 1;
     return <BokPage
       width={width}
       height={claimAll ? height : height * claimHeight}

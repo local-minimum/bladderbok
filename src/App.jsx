@@ -35,7 +35,7 @@ export default class App extends Component {
   }
 
   handleCloseBook() {
-    this.setState({ currentPages: [0, 0, 0 , 0] });
+    this.setState({ currentPages: [0, 0, 0, 0] });
   }
   
   render() {
@@ -51,7 +51,6 @@ export default class App extends Component {
           onSetPages={this.handleSetPages}
           currentPages={currentPages}
         />
-        <BokAbout language={language} />        
         <SelectLanguage
           onSelectLanguage={this.handleChangeLanguage}
           onCloseBook={this.handleCloseBook}

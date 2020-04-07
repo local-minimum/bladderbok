@@ -8,7 +8,7 @@ import flipTo4 from './png/flip_to_4.png';
 import flipTo5 from './png/flip_to_5.png';
 import flipTo6 from './png/flip_to_6.png';
 
-const Arrows = [null, flipTo1, flipTo2, flipTo3, flipTo4, flipTo5, flipTo6];
+const Arrows = [flipTo5, flipTo2, flipTo1, flipTo2, flipTo3, flipTo4, flipTo5, flipTo6];
 
 const baseStyle = {
   background: '#991',

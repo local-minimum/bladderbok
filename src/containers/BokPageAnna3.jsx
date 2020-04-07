@@ -16,8 +16,8 @@ import enImg5 from './png/en/5_3_eng.png';
 import enImg6 from './png/en/6_3_eng.png';
 
 const pages = {
-  sv: [null, svImg1, svImg2, svImg3, svImg4, svImg5, svImg6],
-  en: [null, enImg1, enImg2, enImg3, enImg4, enImg5, enImg6],
+  sv: [null, null, svImg1, svImg2, svImg3, svImg4, svImg5, svImg6],
+  en: [null, null, enImg1, enImg2, enImg3, enImg4, enImg5, enImg6],
 };
 
 export default class BokPageAnna3 extends BokPageContainer {
