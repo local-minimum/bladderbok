@@ -1,8 +1,8 @@
 import React from 'react';
 import imgLangSv from './png/sv/svenska_ikon.png';
 import imgLangEn from './png/en/engelska_ikon.png';
-import imgCloseSv from './png/sv/bokikon_sve.png';
-import imgCloseEn from './png/en/bokikon_eng.png';
+import imgCloseSv from './png/sv/start.png';
+import imgCloseEn from './png/en/start.png';
 
 const languageStyle = {
     position: 'fixed',
@@ -13,7 +13,6 @@ const languageStyle = {
 }
 
 const activeLanguageStyle = {
-    color: '#555',
     cursor: 'pointer',
     height: '2em',
     padding: '0.1em',
@@ -21,11 +20,20 @@ const activeLanguageStyle = {
 }
 
 const otherLanguageStyle = {
-    color: '#222',
     cursor: 'pointer',
     height: '2em',
     padding: '0.1em',
     marginBottom: '0.2em',
+}
+
+const closeBookStyle = {
+    cursor: 'pointer',
+    height: '2em',
+    padding: '0.1em',
+    marginBottom: '0.2em',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    display: 'block',
 }
 
 const closeBook = {
@@ -39,7 +47,7 @@ const closeBook = {
     },
 }
 
-export default function SelectLanguage({ onSelectLanguage, onCloseBook, language }) {
+export default function SelectLanguage({ onSelectLanguage, onCloseBook, language, showClose }) {
     return (
         <div style={languageStyle}>
             <img 
@@ -54,11 +62,12 @@ export default function SelectLanguage({ onSelectLanguage, onCloseBook, language
                 src={imgLangEn}
                 alt="English"
             />
-            <img
+            {showClose && <img
                 onClick={onCloseBook}
-                style={otherLanguageStyle}
+                style={closeBookStyle}
+                alt=""
                 {...closeBook[language]}
-            />
+            />}
         </div>
     );
 }

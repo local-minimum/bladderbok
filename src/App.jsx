@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import BokContainer from './containers/BokContainer';
-import BokAbout from './components/BokAbout';
 import SelectLanguage from './components/SelectLanguage';
 import { IMAGE_WIDTH, IMAGE_HEIGHTS_TOTAL } from './containers/util';
 
@@ -40,6 +39,7 @@ export default class App extends Component {
   
   render() {
     const { language, currentPages } = this.state;
+    const showClose = currentPages.some(p => p > 1);
     return (
       <div style={pageStyle} >
         <BokContainer
@@ -55,6 +55,7 @@ export default class App extends Component {
           onSelectLanguage={this.handleChangeLanguage}
           onCloseBook={this.handleCloseBook}
           language={language}          
+          showClose={showClose}
         />
       </div>
     );
