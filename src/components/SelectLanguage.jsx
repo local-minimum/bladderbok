@@ -26,6 +26,7 @@ const otherLanguageStyle = {
     marginBottom: '0.2em',
 }
 
+// eslint-disable-next-line
 const closeBookStyle = {
     cursor: 'pointer',
     height: '2em',
@@ -64,7 +65,7 @@ export default function SelectLanguage({ onSelectLanguage, onCloseBook, language
             />
             {showClose && <img
                 onClick={onCloseBook}
-                style={closeBookStyle}
+                style={otherLanguageStyle}
                 alt=""
                 {...closeBook[language]}
             />}
